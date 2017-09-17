@@ -1,25 +1,46 @@
 // accessing fonts
 
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import axios from 'axios';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 
 // set up three buttons to hit three separate endpoints
 // on a client app
-export default class App extends React.Component {
+export default class App extends Component {
 
   constructor() {
-     super()
-     this.state = {
-        record: false
-     }
+    super()
+    this.state = {
+      networkStatus: 'pp',
+      networkResponse: 'ww'
+    }
   }
+
+  turnOn = () => {
+    axios.get('https://localhost:6969/api/turnOn').then( response => {
+      alert('The response isss ', response)  
+      console.log(response)
+    }).catch( err => alert(err))
+    }
+  
+
+  turnOff = () => {
+    axios.get('https://localhost:6969/api/turnOff').then( response => {
+      alert("The response is ", response)  
+      console.log(response)
+    }).catch( err => alert(err))
+  }
+  
 
   render() {
     return (
       <View style={styles.container}>
-        <button onTouchTap={ this.startRecording } type="button">Start Recording</button>
-        <button onTouchTap={ this.stopRecording} type="button">Stop Recording</button>
+        <Text>
+asd
+      </Text>
+        <Button onPress={ this.turnOn } type="button" title="Turnsome shit on">Turn some shit on</Button>
+        <Button onPress={ this.turnOff } type="button" title="Offf">Turn some shit off</Button>
       </View>
     );
   }
